@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function shorten(text, maxLength = 50) {
   if (text && text.length > maxLength) {
     return text.substr(0, maxLength) + "...";
@@ -10,12 +12,16 @@ const MovieList = ({ movies = [] }) => (
     {movies.map(({ id, name, image, description, rating }) => (
       <div className="col-lg-4 col-md-6 mb-4" key={id}>
         <div className="card h-100">
-          <a href="#">
-            <img className="card-img-top" src={image} alt="" />
-          </a>
+          <Link href={`/movies/${id}`}>
+            <a>
+              <img className="card-img-top" src={image} alt="" />
+            </a>
+          </Link>
           <div className="card-body">
             <h4 className="card-title">
-              <a href="#">{name}</a>
+              <Link href={`/movies/${id}`}>
+                <a>{name}</a>
+              </Link>
             </h4>
             {/* <h5>$24.99</h5> */}
             <p className="card-text">{shorten(description, 100)}</p>
