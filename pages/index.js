@@ -3,7 +3,7 @@ import { MovieList } from "../components/MovieList";
 import { SideMenu } from "../components/SideMenu";
 import { getMovies } from "../actions";
 
-export default function Home({ movies }) {
+export default function Home({ movies, images }) {
   return (
     <div>
       <div className="container">
@@ -13,7 +13,7 @@ export default function Home({ movies }) {
           </div>
 
           <div className="col-lg-9">
-            <Carousel />
+            <Carousel images={images} />
 
             <div className="row">
               {/* {errorMessage && (
@@ -40,5 +40,10 @@ export default function Home({ movies }) {
 // // This gets called on every request
 export async function getServerSideProps() {
   const movies = await getMovies();
-  return { props: { movies } };
+  const images = movies.map((movie) => ({
+    id: `image-${movie.id}`,
+    url: movie.cover,
+    name: movie.name,
+  }));
+  return { props: { movies, images } };
 }
