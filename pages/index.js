@@ -1,15 +1,15 @@
 import { Carousel } from "../components/Carousel";
 import { MovieList } from "../components/MovieList";
 import { SideMenu } from "../components/SideMenu";
-import { getMovies } from "../actions";
+import { getMovies, getCategories } from "../actions";
 
-export default function Home({ movies, images }) {
+export default function Home({ movies, images, categories }) {
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
-            <SideMenu appName="Movie DB" />
+            <SideMenu appName="Movie DB" categories={categories} />
           </div>
 
           <div className="col-lg-9">
@@ -40,10 +40,11 @@ export default function Home({ movies, images }) {
 // // This gets called on every request
 export async function getServerSideProps() {
   const movies = await getMovies();
+  const categories = await getCategories();
   const images = movies.map((movie) => ({
     id: `image-${movie.id}`,
     url: movie.cover,
     name: movie.name,
   }));
-  return { props: { movies, images } };
+  return { props: { movies, images, categories } };
 }
