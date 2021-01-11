@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const Modal = () => {
+const Modal = ({ children }) => {
   const closeBtnRef = useRef();
 
   const handleSaveChanges = () => {
@@ -39,7 +39,7 @@ const Modal = () => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body"></div>
+            <div className="modal-body">{children}</div>
             <div className="modal-footer">
               <button
                 ref={closeBtnRef}
@@ -64,4 +64,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export { Modal };
