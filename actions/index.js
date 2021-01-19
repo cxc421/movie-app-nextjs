@@ -78,4 +78,16 @@ const getCategories = () => {
   });
 };
 
-export { getMovies, getMovieById, getCategories };
+const createMovie = (movie) => {
+  return new Promise((resolve, reject) => {
+    // ex: 0.979318148425449 => 0.z972fitehzg => z972fit
+    movie.id = Math.random().toString(36).substr(2, 7);
+    MOVIE_DATA.push(movie);
+    setTimeout(() => {
+      resolve(MOVIE_DATA);
+      // reject('Cannot fetch data!')
+    }, 50);
+  });
+};
+
+export { getMovies, getMovieById, getCategories, createMovie };

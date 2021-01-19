@@ -1,11 +1,15 @@
-import { useRef } from "react";
+import { useRef, forwardRef, useImperativeHandle } from "react";
 
-const Modal = ({ children }) => {
+const Modal = forwardRef(({ children, hasSubmit = false }, ref) => {
   const closeBtnRef = useRef();
 
   const handleSaveChanges = () => {
     closeBtnRef.current.click();
   };
+
+  useImperativeHandle(ref, () => ({
+    closeModel: handleSaveChanges,
+  }));
 
   return (
     <>
@@ -49,19 +53,21 @@ const Modal = ({ children }) => {
               >
                 Close
               </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleSaveChanges}
-              >
-                Save changes
-              </button>
+              {hasSubmit && (
+                <button
+                  onClick={handleSaveChanges}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Save changes
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
     </>
   );
-};
+});
 
 export { Modal };

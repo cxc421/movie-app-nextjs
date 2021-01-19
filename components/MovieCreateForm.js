@@ -1,20 +1,20 @@
 import { useState } from "react";
 
-const MovieCreateForm = () => {
+const MovieCreateForm = ({ handleFormSubmit = () => {} }) => {
   const [form, setForm] = useState({
     name: "",
     description: "",
-    rating: undefined,
+    rating: 3,
     image: "",
     cover: "",
     longDesc: "",
     genre: [],
   });
 
-  const handleNameInputChange = ({ target: { name, value } }) => {
+  const handleNameInputChange = ({ target: { name, value, type } }) => {
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: value,
+      [name]: type !== "number" ? value : +value,
     }));
   };
 
@@ -26,6 +26,10 @@ const MovieCreateForm = () => {
       ...prevForm,
       [name]: value,
     }));
+  };
+
+  const submitForm = () => {
+    handleFormSubmit({ ...form, genre: form.genre.join(", ") });
   };
 
   return (
@@ -65,8 +69,7 @@ const MovieCreateForm = () => {
           id="rating"
           name="rating"
           value={form.rating}
-          onChange={form.rating}
-          placeholder="3"
+          onChange={handleNameInputChange}
         />
         <small id="emailHelp" className="form-text text-muted">
           Max: 5, Min: 0{" "}
@@ -124,6 +127,9 @@ const MovieCreateForm = () => {
           <option value="action">action</option>
         </select>
       </div>
+      <button onClick={submitForm} type="button" className="btn btn-primary">
+        Create
+      </button>
     </form>
   );
 };
