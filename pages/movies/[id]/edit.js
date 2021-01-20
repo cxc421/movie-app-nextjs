@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { MovieCreateForm } from "../../../components/movieCreateForm";
+import { MovieCreateForm } from "../../../components/MovieCreateForm";
 import { getMovieById, updateMovie } from "../../../actions";
 
 const EditMovie = ({ movie }) => {
