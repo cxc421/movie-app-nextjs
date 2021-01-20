@@ -1,17 +1,17 @@
 import { useRef } from "react";
+import { useRouter } from "next/router";
 import { Modal } from "./Modal";
 import { MovieCreateForm } from "./MovieCreateForm";
 import { createMovie } from "../actions";
 
 const SideMenu = ({ categories = [], appName = "" }) => {
   const modalRef = useRef();
+  const router = useRouter();
 
   const handleCreateMovie = (movie) => {
     createMovie(movie).then((movies) => {
-      // Close modal after create
-      // console.log(JSON.stringify(movies));
-      console.log(movies);
       modalRef.current.closeModel();
+      router.push("/"); // reload page
     });
   };
 
