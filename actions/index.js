@@ -37,4 +37,17 @@ const deleteMovie = (id) => {
     .then((res) => res.data);
 };
 
-export { getMovies, getMovieById, getCategories, createMovie, deleteMovie };
+const updateMovie = (movie) => {
+  return axios
+    .patch(`${BASE_URL}/api/v1/movies/${movie.id}`, movie)
+    .then((res) => res.data);
+};
+
+export {
+  getMovies,
+  getMovieById,
+  getCategories,
+  createMovie,
+  deleteMovie,
+  updateMovie,
+};

@@ -1,14 +1,28 @@
 import { useState } from "react";
 
-const MovieCreateForm = ({ handleFormSubmit = () => {} }) => {
-  const [form, setForm] = useState({
-    name: "",
-    description: "",
-    rating: 3,
-    image: "",
-    cover: "",
-    longDesc: "",
-    genre: [],
+const MovieCreateForm = ({
+  handleFormSubmit = () => {},
+  initialData,
+  submitButtonText = "",
+}) => {
+  const [form, setForm] = useState(() => {
+    if (initialData) {
+      if (typeof initialData.genre === "string") {
+        initialData.genre = initialData.genre
+          .split(",")
+          .map((text) => text.trim());
+      }
+      return initialData;
+    }
+    return {
+      name: "",
+      description: "",
+      rating: 3,
+      image: "",
+      cover: "",
+      longDesc: "",
+      genre: [],
+    };
   });
 
   const handleNameInputChange = ({ target: { name, value, type } }) => {
@@ -128,7 +142,7 @@ const MovieCreateForm = ({ handleFormSubmit = () => {} }) => {
         </select>
       </div>
       <button onClick={submitForm} type="button" className="btn btn-primary">
-        Create
+        {submitButtonText || "Create"}
       </button>
     </form>
   );
