@@ -8,12 +8,9 @@ export default function Home({ movies = [], images, categories }) {
   const [filter, setFilter] = useState("all");
 
   const filterMovies = useMemo(() => {
-    if (filter === "all") {
-      return movies;
-    }
-    return movies.filter((m) => {
-      return m.genre && m.genre.includes(filter);
-    });
+    return filter === "all"
+      ? movies
+      : movies.filter((m) => m.genre && m.genre.includes(filter));
   }, [filter, movies]);
 
   const changeCategory = (category) => {
