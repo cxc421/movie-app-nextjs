@@ -23,7 +23,7 @@ const MovieList = ({ movies = [] }) => (
                 <a>{name}</a>
               </Link>
             </h4>
-            <div>{genre}</div>
+            <div className="movie-genre">{genre}</div>
             <p className="card-text">{shorten(description, 100)}</p>
           </div>
           <div className="card-footer">

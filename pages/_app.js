@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { NavBar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
-import "../styles/globals.css";
+
+import "../styles/index.scss";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -37,7 +38,8 @@ function MyApp({ Component, pageProps }) {
       <Footer />
       <style jsx>{`
         .page-wrapper {
-          padding-top: 80px;
+          padding-top: 100px;
+          padding-bottom: 200px;
         }
       `}</style>
     </div>

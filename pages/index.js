@@ -21,7 +21,7 @@ export default function Home({ movies = [], images, categories }) {
   };
 
   return (
-    <div>
+    <div className="home-page">
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
@@ -35,7 +35,7 @@ export default function Home({ movies = [], images, categories }) {
 
           <div className="col-lg-9">
             <Carousel images={images} />
-            <h1>Displaying {filter} movies</h1>
+            <h1 className="h3 pb-2">Displaying {filter} movies</h1>
             <div className="row">
               <MovieList movies={filterMovies} />
             </div>
