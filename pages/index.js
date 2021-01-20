@@ -1,27 +1,43 @@
+import { useState, useMemo } from "react";
 import { Carousel } from "../components/Carousel";
 import { MovieList } from "../components/MovieList";
 import { SideMenu } from "../components/SideMenu";
 import { getMovies, getCategories } from "../actions";
 
-export default function Home({ movies, images, categories }) {
+export default function Home({ movies = [], images, categories }) {
+  const [filter, setFilter] = useState("all");
+
+  const filterMovies = useMemo(() => {
+    if (filter === "all") {
+      return movies;
+    }
+    return movies.filter((m) => {
+      return m.genre && m.genre.includes(filter);
+    });
+  }, [filter, movies]);
+
+  const changeCategory = (category) => {
+    setFilter(category);
+  };
+
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
-            <SideMenu appName="Movie DB" categories={categories} />
+            <SideMenu
+              appName="Movie DB"
+              categories={categories}
+              changeCategory={changeCategory}
+              activeCategory={filter}
+            />
           </div>
 
           <div className="col-lg-9">
             <Carousel images={images} />
-
+            <h1>Displaying {filter} movies</h1>
             <div className="row">
-              {/* {errorMessage && (
-                <div className="alert alert-danger" role="alert">
-                  {errorMessage}
-                </div>
-              )} */}
-              <MovieList movies={movies} />
+              <MovieList movies={filterMovies} />
             </div>
           </div>
         </div>

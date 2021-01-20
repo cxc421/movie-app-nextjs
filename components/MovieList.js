@@ -9,7 +9,7 @@ function shorten(text, maxLength = 50) {
 
 const MovieList = ({ movies = [] }) => (
   <>
-    {movies.map(({ id, name, image, description, rating }) => (
+    {movies.map(({ id, name, image, description, rating, genre }) => (
       <div className="col-lg-4 col-md-6 mb-4" key={id}>
         <div className="card h-100">
           <Link href={`/movies/${id}`}>
@@ -23,13 +23,10 @@ const MovieList = ({ movies = [] }) => (
                 <a>{name}</a>
               </Link>
             </h4>
-            {/* <h5>$24.99</h5> */}
+            <div>{genre}</div>
             <p className="card-text">{shorten(description, 100)}</p>
           </div>
           <div className="card-footer">
-            {/* <small className="text-muted">
-              &#9733; &#9733; &#9733; &#9733; &#9734;
-            </small> */}
             <small className="text-muted">{rating}</small>
           </div>
         </div>

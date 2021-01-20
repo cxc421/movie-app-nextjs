@@ -4,7 +4,12 @@ import { Modal } from "./Modal";
 import { MovieCreateForm } from "./MovieCreateForm";
 import { createMovie } from "../actions";
 
-const SideMenu = ({ categories = [], appName = "" }) => {
+const SideMenu = ({
+  categories = [],
+  appName = "",
+  changeCategory = () => {},
+  activeCategory,
+}) => {
   const modalRef = useRef();
   const router = useRouter();
 
@@ -23,7 +28,14 @@ const SideMenu = ({ categories = [], appName = "" }) => {
       <h1 className="my-4">{appName}</h1>
       <div className="list-group">
         {categories.map((c) => (
-          <a key={c.id} href="#" className="list-group-item">
+          <a
+            key={c.id}
+            href="#"
+            className={`list-group-item ${
+              activeCategory === c.name ? "active" : ""
+            }`}
+            onClick={() => changeCategory(c.name)}
+          >
             {c.name}
           </a>
         ))}
