@@ -44,6 +44,10 @@ const updateMovie = (movie) => {
     .then((res) => res.data);
 };
 
+const getPosts = () => {
+  return axios.get(`${BASE_URL}/api/v1/posts`).then((res) => res.data);
+};
+
 export {
   getMovies,
   getMovieById,
@@ -51,4 +55,5 @@ export {
   createMovie,
   deleteMovie,
   updateMovie,
+  getPosts,
 };

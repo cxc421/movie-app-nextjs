@@ -23,7 +23,7 @@ export default function Home({ movies = [], images, categories }) {
         <div className="row">
           <div className="col-lg-3">
             <SideMenu
-              appName="Movie DB"
+              appName="Categories"
               categories={categories}
               changeCategory={changeCategory}
               activeCategory={filter}
